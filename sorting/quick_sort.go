@@ -1,21 +1,18 @@
 package main
 
-import (
-	"fmt"
-)
+// This is quicksort algorithm. You can find a good and brief
+// explanation here: https://www.youtube.com/watch?v=COk73cpQbFQ
 
-func main() {
-	arr := []int{3,8,5,4,1,9,-2,0,4,55,5,5,9}
-	
-	quick_sort(arr, 0, len(arr)-1)
+func quick_sort(arr []int, low, high int) {
 
-	fmt.Println(arr)
-}
+	if len(arr) <= 1 || low >= high {
+		return
+	}
 
-func swap(arr []int, i int, j int) {
-	temp := arr[i]
-	arr[i] = arr[j]
-	arr[j] = temp
+	pivotIndex := partition(arr, low, high)
+	quick_sort(arr, low, pivotIndex-1)
+	quick_sort(arr, pivotIndex+1, high)
+
 }
 
 func partition(arr []int, low, high int) int {
@@ -32,14 +29,9 @@ func partition(arr []int, low, high int) int {
 	return i+1
 }
 
-func quick_sort(arr []int, low, high int) {
 
-	if len(arr) <= 1 || low >= high {
-		return
-	}
-
-	pivotIndex := partition(arr, low, high)
-	quick_sort(arr, low, pivotIndex-1)
-	quick_sort(arr, pivotIndex+1, high)
-
+func swap(arr []int, i int, j int) {
+	temp := arr[i]
+	arr[i] = arr[j]
+	arr[j] = temp
 }
